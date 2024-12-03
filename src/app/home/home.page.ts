@@ -18,6 +18,7 @@ export class HomePage {
     const newTask: Task = {
       title: title,
       completed: false,
+      status: 0
     };
     this.tasks.push(newTask);  
     }

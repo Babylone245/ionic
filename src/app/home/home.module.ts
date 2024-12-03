@@ -17,6 +17,7 @@ import { AddTaskComponent } from '../add-task/add-task.component';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, TaskDetailComponent, TaskListComponent, AddTaskComponent]
+  declarations: [HomePage, TaskDetailComponent, TaskListComponent, AddTaskComponent],
+  bootstrap: [HomePage,AddTaskComponent,TaskDetailComponent,TaskListComponent],
 })
 export class HomePageModule {}

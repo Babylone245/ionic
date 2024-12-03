@@ -8,17 +8,17 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class AddTaskComponent  implements OnInit {
   @Output() addTask = new EventEmitter<string>();
   constructor() { }
-  task: string = '';
+  title: string = '';
   ngOnInit() {
-    this.task = 'Test';
+    this.title = 'Test';
   }
 
 
 
   add() {
-    if (this.task.trim()) {
-      this.addTask.emit(this.task);
-      this.task = ''; // Réinitialiser le champ
+    if (this.title.trim()) {
+      this.addTask.emit(this.title);
+      this.title = ''; // Réinitialiser le champ
     }
   }
 }

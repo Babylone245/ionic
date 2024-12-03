@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Task } from '../models/task';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
@@ -6,10 +8,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./task-list.component.scss'],
 })
 export class TaskListComponent  implements OnInit {
-  @Input() tasks: string[] = [];
+  @Input() tasks: Task[] = [];
   @Output() removeTask = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit() {}
   
@@ -17,5 +19,8 @@ export class TaskListComponent  implements OnInit {
     this.removeTask.emit(index); 
   }
 
+  viewDetail(task : Task){
+    this.router.navigate(['/task-detail'], { state: { task } });
+  }
 
 }
