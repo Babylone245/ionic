@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../models/task';
 import { Router } from '@angular/router';
+import { TaskService } from '../service/taskservice.service';
 
 @Component({
   selector: 'app-task-detail',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class TaskDetailComponent{
   task!: Task; 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private taskService: TaskService) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras?.state && navigation.extras.state['task']) {
       this.task = navigation.extras.state['task']; 
@@ -19,7 +20,7 @@ export class TaskDetailComponent{
 
     // Met à jour la progression dans le service
     updateProgress() {
-      console.log('Nouvelle progression de la tâche :', this.task.status);
+      this.taskService.updateTask(this.task);
     }
 
   getStatusText() {

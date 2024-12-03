@@ -1,4 +1,6 @@
-<ion-item>
-  <ion-input [(ngModel)]="title" placeholder="Ajouter une tâche"></ion-input>
-</ion-item>
-<ion-button expand="full" (click)="add()">Ajouter</ion-button>
+<form [formGroup]="taskForm" (ngSubmit)="add()">
+  <ion-item>
+    <ion-input formControlName="title" placeholder="Ajouter une tâche"></ion-input>
+  </ion-item>
+  <ion-button expand="full" type="submit">Ajouter</ion-button>
+</form>

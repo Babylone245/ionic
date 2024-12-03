@@ -1,6 +1,6 @@
 <ion-list>
-  <ion-item *ngFor="let task of tasks; let i = index" >
+  <ion-item *ngFor="let task of tasks;">
     <ion-label (click)="viewDetail(task)">{{ task.title }}</ion-label>
-    <ion-button (click)="onRemoveTask(i)"><ion-icon name="trash"></ion-icon></ion-button>
+    <ion-button (click)="onRemoveTask(task.id)"><ion-icon name="trash"></ion-icon></ion-button>
   </ion-item>
 </ion-list>
