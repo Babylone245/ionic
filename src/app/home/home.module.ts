@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
@@ -9,7 +9,7 @@ import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { TaskListComponent } from '../task-list/task-list.component';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { environment } from '../environements/environments';
+import { environment } from '../../../src/environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 
 
@@ -17,14 +17,15 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicModule.forRoot(),
     HomePageRoutingModule,
     ReactiveFormsModule
   ],
   declarations: [HomePage, TaskDetailComponent, TaskListComponent, AddTaskComponent],
     providers: [
       provideFirebaseApp(() => initializeApp(environment.firebase)), 
-      provideFirestore(() => getFirestore())
+      provideFirestore(() => getFirestore()),
+      DatePipe
     ],
   bootstrap: [HomePage,AddTaskComponent,TaskDetailComponent,TaskListComponent],
 })

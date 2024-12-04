@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Task } from '../models/task';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { TaskService } from '../service/taskservice.service';
+import { TaskService } from '../services/taskservice.service';
 
 @Component({
   selector: 'app-task-list',
@@ -21,5 +20,14 @@ export class TaskListComponent {
 
   viewDetail(task: Task) {
     this.router.navigate(['/task-detail'], { state: { task } });
+  }
+
+  reorderTasks(event: any) {
+  const movedItem = this.tasks.splice(event.detail.from, 1)[0]; 
+  this.tasks.splice(event.detail.to, 0, movedItem);  
+  this.tasks.forEach((task, index) => {
+    task.order = index; 
+  });
+  event.detail.complete();
   }
 }

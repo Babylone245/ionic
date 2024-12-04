@@ -1,6 +1,17 @@
 <form [formGroup]="taskForm" (ngSubmit)="add()">
-  <ion-item>
-    <ion-input formControlName="title" placeholder="Ajouter une tâche"></ion-input>
+  <ion-item class="form-group">
+    <ion-input formControlName="title" placeholder="Ajouter une tâche" class="form-control"></ion-input>
+  </ion-item>
+  <ion-item class="form-group">
+    <ion-label position="floating" class="pb-2">Date et heure de fin</ion-label>
+    <ion-datetime 
+      formControlName="endDate"
+      id="endDate"
+      display-format="YYYY-MM-DDTHH:mm"
+      picker-format="DD MMM YYYY, HH:mm"
+      required
+      class="form-control">
+    </ion-datetime>
   </ion-item>
   <ion-button expand="full" type="submit">Ajouter</ion-button>
 </form>

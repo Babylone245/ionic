@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Task } from 'src/app/models/task';
-import { TaskService } from '../service/taskservice.service';
+import { TaskService } from '../services/taskservice.service';
+import { LocalNotifications } from '@capacitor/local-notifications';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -11,33 +13,36 @@ export class HomePage {
   tasks: Task[] = [];
   selectedTask: string = '';
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private notificationService : NotificationService) { }
 
   ngOnInit() {
+    this.notificationService.checkAndRequestPermissions();
     this.loadTasks();
   }
 
   loadTasks() {
     this.taskService.getTasks().subscribe((tasks) => {
       this.tasks = tasks;
-      console.log(this.tasks);
     });
   }
 
-  addTask(title: string) {
-    if (title.trim()) {
+  addTask(taskData: { title: string, endDate: string }) {
+    if (taskData.title.trim() && taskData.endDate) {
       const newTask: Task = {
-        title: title,
+        title: taskData.title,
         completed: false,
         status: 0,
+        order: this.tasks.length,
+        endDate: taskData.endDate,
       };
 
       this.taskService.addTask(newTask).then(() => {
-        // Recharge les tâches après ajout
         this.loadTasks();
+        this.notificationService.scheduleNotification(newTask);
       });
     }
   }
+  
 
   deleteTask(id: string) {
     this.taskService.deleteTask(id).then(() => {

@@ -1,6 +1,19 @@
-<ion-list>
-  <ion-item *ngFor="let task of tasks;">
-    <ion-label (click)="viewDetail(task)">{{ task.title }}</ion-label>
-    <ion-button (click)="onRemoveTask(task.id)"><ion-icon name="trash"></ion-icon></ion-button>
-  </ion-item>
-</ion-list>
+<ion-content padding>
+  <ion-list>
+    <ion-reorder-group (ionItemReorder)="reorderTasks($event)" disabled="false">
+      <ion-item-sliding *ngFor="let task of tasks; let i = index">
+        <ion-item>
+          <ion-label (click)="viewDetail(task)">{{ task.title }}</ion-label>
+          <ion-reorder slot="end"></ion-reorder>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="onRemoveTask(task.id)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+            Supprimer
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-reorder-group>
+  </ion-list>
+
+</ion-content>
