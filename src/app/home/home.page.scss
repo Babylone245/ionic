@@ -25,3 +25,15 @@
 #container a {
   text-decoration: none;
 }
+ion-content {
+  --padding-bottom: 0px; 
+  height: calc(100vh - 56px); 
+}
+
+ion-tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}

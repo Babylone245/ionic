@@ -13,7 +13,7 @@ export class NotificationService {
 
   async scheduleNotification(task: Task) {
     const endDate = new Date(task.endDate);
-    const notificationTime =  new Date(endDate.getTime() - 24 * 60 * 60 * 1000);;
+    const notificationTime =  new Date(endDate.getTime() - 24 * 60 * 60 * 1000);
     const permission = await LocalNotifications.checkPermissions();
     if (permission.display  === 'granted') {
       await LocalNotifications.schedule({
@@ -46,11 +46,27 @@ export class NotificationService {
     // Vérifie les permissions pour les notifications locales et demande si nécessaire
     async checkAndRequestPermissions() {
       try {
+        const alert = await this.alertController.create({
+          header: 'Permission',
+          message: "Autorisez l'utilisation des notifications vous permet de recevoir une notification rappel avant la fin de votre tâche",
+          buttons: ['OK']
+        });
+        await alert.present();
         const permission = await LocalNotifications.requestPermissions();
         if (permission.display === 'granted') {
-          console.log('Permission pour les notifications locales accordée');
+          const alert = await this.alertController.create({
+            header: 'Permission',
+            message: "Permission pour les notifications locales accordée",
+            buttons: ['OK']
+          });
+          await alert.present();
         } else {
-          console.log('Permission pour les notifications locales refusée');
+          const alert = await this.alertController.create({
+            header: 'Permission',
+            message: "Permission pour les notifications locales refusée",
+            buttons: ['OK']
+          });
+          await alert.present();
         }
       } catch (error) {
         console.error('Erreur lors de la demande de permissions :', error);

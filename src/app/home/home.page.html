@@ -5,7 +5,39 @@
 </ion-header>
 
 <ion-content>
-  <app-add-task (addTask)="addTask($event)"></app-add-task>
+  <ion-tabs>
+    <ion-tab tab="add">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Ajouter</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <app-add-task (addTask)="addTask($event)"></app-add-task>
+      </ion-content>
+    </ion-tab>
 
-  <app-task-list  [tasks]="tasks" (removeTask)="deleteTask($event)"></app-task-list>
+    <ion-tab tab="list">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Liste des tâches</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <app-task-list [tasks]="tasks" (removeTask)="deleteTask($event)"></app-task-list>
+      </ion-content>
+    </ion-tab>
+
+    <!-- Tab bar en bas -->
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="add">
+        <ion-icon name="add-circle"></ion-icon>
+        <ion-label>Ajouter</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="list">
+        <ion-icon name="list"></ion-icon>
+        <ion-label>Liste</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>
